@@ -9,6 +9,8 @@
 <body>
 <div class="container">
     <h1>Items</h1>
+    <a href="dashboard.jsp" class="back-link-top">Back</a>
+    <br>
     <a href="item?action=add">Add New Item</a>
     <table>
         <tr>
