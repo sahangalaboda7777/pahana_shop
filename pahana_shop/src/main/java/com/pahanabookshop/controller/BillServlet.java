@@ -51,7 +51,6 @@ public class BillServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String billNo = request.getParameter("billNo");
         String accountNo = request.getParameter("accountNo");
         String[] itemIds = request.getParameterValues("itemId");
         String[] quantities = request.getParameterValues("quantity");
@@ -74,25 +73,25 @@ public class BillServlet extends HttpServlet {
             double subTotal = item.getPrice() * qty;
             totalAmount += subTotal;
 
-            BillItem billItem = new BillItem(0, billNo, id, qty, item.getPrice(), subTotal);
+            BillItem billItem = new BillItem(0, null, id, qty, item.getPrice(), subTotal);
             billItems.add(billItem);
         }
 
-        // Create Bill object
-        Bill bill = new Bill(billNo, accountNo, new java.sql.Date(new Date().getTime()), totalAmount, null);
-        billService.addBill(bill);
+        // Create Bill object (billId will be generated in DB)
+        Bill bill = new Bill(0, accountNo, new java.sql.Date(new Date().getTime()), totalAmount, billItems);
+        billService.addBill(bill); // billId + billNo will be filled
 
-        // Generate PDF
+        // Generate PDF with billNo (formatted)
         try {
             String folderPath = "C:/bills/";
             File folder = new File(folderPath);
             if (!folder.exists()) folder.mkdirs();
 
-            PdfWriter writer = new PdfWriter(folderPath + billNo + ".pdf");
+            PdfWriter writer = new PdfWriter(folderPath + bill.getBillNo() + ".pdf");
             PdfDocument pdfDoc = new PdfDocument(writer);
             Document document = new Document(pdfDoc);
 
-            document.add(new Paragraph("Bill No: " + billNo));
+            document.add(new Paragraph("Bill No: " + bill.getBillNo()));
             document.add(new Paragraph("Account No: " + accountNo));
             document.add(new Paragraph("Date: " + new Date()));
             document.add(new Paragraph("-----------------------------------------------------"));
@@ -114,4 +113,5 @@ public class BillServlet extends HttpServlet {
 
         response.sendRedirect("bill?action=list");
     }
+
 }

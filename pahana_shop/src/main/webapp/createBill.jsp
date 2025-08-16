@@ -117,6 +117,27 @@
         input[type="number"] {
             width: 60px;
         }
+        select {
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+    background: #fff;
+    color: #444;
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: #4facfe;
+}
+
+option {
+    padding: 8px;
+}
+        
     </style>
 </head>
 <body>
@@ -124,9 +145,7 @@
     <h1>➕ Create Bill</h1>
 
     <form method="post" action="bill">
-        <label>Bill No:</label>
-        <input type="text" name="billNo" required>
-
+       
         <label>Customer:</label>
 <select name="accountNo" required>
     <option value="">-- Select Customer --</option>
