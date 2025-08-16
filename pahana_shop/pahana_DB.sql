@@ -16,28 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `bill_items`
---
-
-DROP TABLE IF EXISTS `bill_items`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `bill_items` (
-  `bill_item_id` int NOT NULL AUTO_INCREMENT,
-  `bill_no` int NOT NULL,
-  `item_id` int NOT NULL,
-  `quantity` int NOT NULL,
-  `unit_price` decimal(10,2) NOT NULL,
-  `sub_total` decimal(12,2) NOT NULL,
-  PRIMARY KEY (`bill_item_id`),
-  KEY `bill_no` (`bill_no`),
-  KEY `item_id` (`item_id`),
-  CONSTRAINT `bill_items_ibfk_1` FOREIGN KEY (`bill_no`) REFERENCES `bills` (`bill_no`) ON DELETE CASCADE,
-  CONSTRAINT `bill_items_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `bills`
 --
 
@@ -52,7 +30,7 @@ CREATE TABLE `bills` (
   PRIMARY KEY (`bill_no`),
   KEY `account_no` (`account_no`),
   CONSTRAINT `bills_ibfk_1` FOREIGN KEY (`account_no`) REFERENCES `customers` (`account_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1248 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,12 +41,14 @@ DROP TABLE IF EXISTS `customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customers` (
-  `account_no` varchar(20) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `account_no` varchar(20) DEFAULT NULL,
   `name` varchar(100) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `phone` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`account_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `account_no` (`account_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +64,7 @@ CREATE TABLE `items` (
   `price` decimal(10,2) NOT NULL,
   `stock` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`item_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,4 +189,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-16 12:38:58
+-- Dump completed on 2025-08-16 17:36:06
