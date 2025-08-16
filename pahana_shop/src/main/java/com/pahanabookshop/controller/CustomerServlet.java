@@ -38,17 +38,17 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String accountNo = request.getParameter("accountNo");
+        String accountNo = request.getParameter("accountNo"); // remove for new add
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
 
         Customer customer = new Customer(accountNo, name, address, phone);
 
-        if (customerService.getCustomerByAccountNo(accountNo) != null) {
+        if (accountNo != null && customerService.getCustomerByAccountNo(accountNo) != null) {
             customerService.updateCustomer(customer);
         } else {
-            customerService.addCustomer(customer);
+            customerService.addCustomer(customer); // accountNo auto-generated inside DAO
         }
 
         response.sendRedirect("customer?action=list");

@@ -127,8 +127,23 @@
         <label>Bill No:</label>
         <input type="text" name="billNo" required>
 
-        <label>Account No:</label>
-        <input type="text" name="accountNo" required>
+        <label>Customer:</label>
+<select name="accountNo" required>
+    <option value="">-- Select Customer --</option>
+    <%
+        List<com.pahanabookshop.model.Customer> customers = 
+            (List<com.pahanabookshop.model.Customer>) request.getAttribute("customers");
+        if(customers != null){
+            for(com.pahanabookshop.model.Customer cust : customers){
+    %>
+        <option value="<%=cust.getAccountNo()%>">
+            <%=cust.getName()%> ( <%=cust.getAccountNo()%> )
+        </option>
+    <%
+            }
+        }
+    %>
+</select>
 
         <h3>Select Items</h3>
         <table>

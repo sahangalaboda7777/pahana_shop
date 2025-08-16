@@ -89,11 +89,7 @@
     <h1><%= (customer != null) ? "✏ Edit Customer" : "➕ Add Customer" %></h1>
 
     <form method="post" action="customer">
-        <label>Account No:</label>
-        <input type="text" name="accountNo" 
-               value="<%= (customer != null) ? customer.getAccountNo() : "" %>" 
-               <%= (customer != null) ? "readonly" : "required" %>>
-
+  
         <label>Name:</label>
         <input type="text" name="name" 
                value="<%= (customer != null) ? customer.getName() : "" %>" required>

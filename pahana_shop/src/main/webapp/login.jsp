@@ -94,9 +94,9 @@
     <h1>Login</h1>
 
     <!-- Error Message -->
-    <c:if test="${not empty error}">
-        <div class="error">${error}</div>
-    </c:if>
+<% if (request.getAttribute("error") != null) { %>
+    <div class="error"><%= request.getAttribute("error") %></div>
+<% } %>
 
     <form method="post" action="login">
         <div class="form-group">

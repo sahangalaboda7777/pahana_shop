@@ -23,18 +23,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.pahanabookshop.model.Customer;
+import com.pahanabookshop.service.CustomerService;
+import com.pahanabookshop.service.impl.CustomerServiceImpl;
+
 @WebServlet("/bill")
 public class BillServlet extends HttpServlet {
 
     private BillService billService = new BillServiceImpl();
     private ItemService itemService = new ItemServiceImpl();
+    private CustomerService customerService = new CustomerServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if ("create".equals(action)) {
             List<Item> items = itemService.getAllItems();
+            List<Customer> customers = customerService.getAllCustomers(); // ✅ get customers
             request.setAttribute("items", items);
+            request.setAttribute("customers", customers); // ✅ pass to JSP
             request.getRequestDispatcher("createBill.jsp").forward(request, response);
         } else if ("list".equals(action)) {
             request.setAttribute("bills", billService.getAllBills());
