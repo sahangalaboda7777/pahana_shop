@@ -113,7 +113,7 @@
 <div class="navbar">
     <h1>Pahana Bookshop</h1>
     <div>
-        <a href="#">Dashboard</a>
+        <a href="#">AdminDashboard</a>
         <a href="login.jsp" class="logout-btn">Logout</a>
     </div>
 </div>
@@ -125,17 +125,12 @@
     </div>
 
     <div class="cards">
-        <div class="card">
-            <a href="item?action=list">📚 Manage Items</a>
-        </div>
-        <div class="card">
-            <a href="customer?action=list">👥 Manage Customers</a>
-        </div>
-        <div class="card">
-            <a href="bill?action=list">🧾 Manage Bills</a>
-        </div>
                 <div class="card">
             <a href="help.jsp">🧾 System help</a>
+        </div>
+        
+                        <div class="card">
+            <a href="addUser.jsp">🧾 Add Staff</a>
         </div>
     </div>
 </div>

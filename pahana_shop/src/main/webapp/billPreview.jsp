@@ -30,14 +30,16 @@
         .back-link-top {
             display: inline-block;
             margin-bottom: 15px;
+            padding: 8px 15px;
+            background: #ddd;
+            border-radius: 6px;
             text-decoration: none;
+            color: #333;
             font-size: 14px;
-            color: #4facfe;
-            font-weight: 500;
         }
 
         .back-link-top:hover {
-            text-decoration: underline;
+            background: #bbb;
         }
 
         a[href*="create"] {
@@ -86,7 +88,7 @@
 </head>
 <body>
 <div class="container">
-    <a class="back-link-top" href="dashboard.jsp">⬅ Back to Dashboard</a>
+    <a class="back-link-top" href="dashboard.jsp">⬅ Back</a>
     <h1>📜 All Bills</h1>
     <a href="bill?action=create">➕ Create New Bill</a>
     <table>

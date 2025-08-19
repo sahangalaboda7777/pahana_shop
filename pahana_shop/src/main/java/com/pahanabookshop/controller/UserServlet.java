@@ -28,12 +28,22 @@ public class UserServlet extends HttpServlet {
         System.out.println("Entered password: " + password);
         System.out.println("Entered password hashed: " + hashPassword(password));
         System.out.println("Password from DB: " + (user != null ? user.getPassword() : "null"));
+        System.out.println("Role from DB: " + (user != null ? user.getRole() : "null"));
         // 
 
         if (user != null && user.getPassword().equals(hashPassword(password))) {
             HttpSession session = request.getSession();
             session.setAttribute("currentUser", user);
-            response.sendRedirect("dashboard.jsp");
+
+            // Redirect based on role
+            if ("admin".equalsIgnoreCase(user.getRole())) {
+                response.sendRedirect("admin.jsp");
+            } else if ("staff".equalsIgnoreCase(user.getRole())) {
+                response.sendRedirect("dashboard.jsp");
+            } else {
+                // Default (in case new roles are added later)
+                response.sendRedirect("dashboard.jsp");
+            }
         } else {
             request.setAttribute("error", "Invalid username or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -55,3 +65,5 @@ public class UserServlet extends HttpServlet {
         }
     }
 }
+
+
